@@ -2,17 +2,17 @@
 %define         _pearname       %{_class}
 %define         _status         stable
 
-%define         _requires_exceptions pear(test_setup.php)\\|pear(MDB2/Schema.php)
+%define         _requires_exceptions pear(test_setup.php)\\|pear(MDB2/Schema.php)\\|pear(PHPUnit.php)
 
 Summary:        %{_pearname} - unified database API
 Name:           php-pear-%{_pearname}
-Version:        2.3.0
+Version:        2.4.0
 Release:        %mkrel 1
 Epoch:          1
 License:        PHP License
 Group:          Development/PHP
-Source0:        http://pear.php.net/get/%{_pearname}-%{version}.tgz
 URL:            http://pear.php.net/package/MDB2/
+Source0:        http://pear.php.net/get/%{_pearname}-%{version}.tgz
 Requires(post): php-pear
 Requires(preun): php-pear
 Requires:       php-pear
@@ -45,7 +45,7 @@ find -type f | grep -v ".gif" | grep -v ".png" | grep -v ".jpg" | xargs %{__perl
 %install
 rm -rf %{buildroot}
 
-install -d %{buildroot}%{_datadir}/pear/%{_class}/{Driver/{Datatype,Function,Manager,Native,Reverse}}
+install -d %{buildroot}%{_datadir}/pear/%{_class}/Driver/{Datatype,Function,Manager,Native,Reverse}
 
 install %{_pearname}-%{version}/*.php %{buildroot}%{_datadir}/pear/
 install %{_pearname}-%{version}/%{_class}/*.php %{buildroot}%{_datadir}/pear/%{_class}/
