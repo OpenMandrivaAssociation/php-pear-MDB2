@@ -17,6 +17,7 @@ Requires(post): php-pear
 Requires(preun): php-pear
 Requires:       php-pear
 BuildArch:      noarch
+BuildRoot:      %{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 MDB2 is a merge of PEAR's DB and Metabases that provides a unified DB
