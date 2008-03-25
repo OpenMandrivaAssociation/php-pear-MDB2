@@ -1,13 +1,13 @@
 %define         _class          MDB2
 %define         _pearname       %{_class}
-%define         _status         stable
+%define         _status         beta
 
 %define         _requires_exceptions pear(test_setup.php)\\|pear(MDB2/Schema.php)\\|pear(PHPUnit.php)
 
 Summary:        %{_pearname} - unified database API
 Name:           php-pear-%{_pearname}
-Version:        2.4.1
-Release:        %mkrel 2
+Version:        2.5.0b1
+Release:        %mkrel 1
 Epoch:          1
 License:        PHP License
 Group:          Development/PHP
