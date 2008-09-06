@@ -1,23 +1,24 @@
-%define         _class          MDB2
-%define         _pearname       %{_class}
-%define         _status         beta
+%define		_class		MDB2
+%define		_pearname	%{_class}
+%define		_status		beta
 
-%define         _requires_exceptions pear(test_setup.php)\\|pear(MDB2/Schema.php)\\|pear(PHPUnit.php)
+%define		_requires_exceptions pear(test_setup.php)\\|pear(MDB2/Schema.php)\\|pear(PHPUnit.php)
 
-Summary:        %{_pearname} - unified database API
-Name:           php-pear-%{_pearname}
-Version:        2.5.0b1
-Release:        %mkrel 2
-Epoch:          1
-License:        PHP License
-Group:          Development/PHP
-URL:            http://pear.php.net/package/MDB2/
-Source0:        http://pear.php.net/get/%{_pearname}-%{version}.tgz
+Summary:	%{_pearname} - unified database API
+Name:		php-pear-%{_pearname}
+Version:	2.5.0b1
+Release:	%mkrel 3
+Epoch:		1
+License:	PHP License
+Group:		Development/PHP
+URL:		http://pear.php.net/package/MDB2/
+Source0:	http://pear.php.net/get/%{_pearname}-%{version}.tgz
 Requires(post): php-pear
 Requires(preun): php-pear
-Requires:       php-pear
-BuildArch:      noarch
-BuildRoot:      %{_tmppath}/%{name}-%{version}-buildroot
+Requires:	php-pear
+BuildArch:	noarch
+Suggests:	php-pear-MDB2_Driver_mysqli php-pear-MDB2_Driver_pgsql php-pear-MDB2_Driver_sqlite
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 MDB2 is a merge of PEAR's DB and Metabases that provides a unified DB
@@ -86,5 +87,3 @@ rm -rf %{buildroot}
 %{_datadir}/pear/*.php
 %{_datadir}/pear/%{_class}
 %{_datadir}/pear/packages/%{_pearname}.xml
-
-
