@@ -7,7 +7,7 @@
 Summary:	%{_pearname} - unified database API
 Name:		php-pear-%{_pearname}
 Version:	2.5.0b1
-Release:	%mkrel 4
+Release:	%mkrel 5
 Epoch:		1
 License:	PHP License
 Group:		Development/PHP
