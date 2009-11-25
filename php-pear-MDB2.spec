@@ -1,24 +1,26 @@
 %define		_class		MDB2
-%define		_pearname	%{_class}
-%define		_status		beta
+%define		upstream_name	%{_class}
 
 %define		_requires_exceptions pear(test_setup.php)\\|pear(MDB2/Schema.php)\\|pear(PHPUnit.php)
 
-Summary:	%{_pearname} - unified database API
-Name:		php-pear-%{_pearname}
+Name:		php-pear-%{upstream_name}
 Version:	2.5.0b1
-Release:	%mkrel 6
+Release:	%mkrel 7
+Summary:	Unified database API
 Epoch:		1
 License:	PHP License
 Group:		Development/PHP
 URL:		http://pear.php.net/package/MDB2/
-Source0:	http://pear.php.net/get/%{_pearname}-%{version}.tgz
+Source0:	http://download.pear.php.net/package/%{upstream_name}-%{version}.tgz
 Requires(post): php-pear
 Requires(preun): php-pear
 Requires:	php-pear
 BuildArch:	noarch
-Suggests:	php-pear-MDB2_Driver_mysql php-pear-MDB2_Driver_mysqli php-pear-MDB2_Driver_pgsql php-pear-MDB2_Driver_sqlite
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Suggests:	php-pear-MDB2_Driver_mysql
+Suggests:	php-pear-MDB2_Driver_mysqli
+Suggests:	php-pear-MDB2_Driver_pgsql
+Suggests:	php-pear-MDB2_Driver_sqlite
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 MDB2 is a merge of PEAR's DB and Metabases that provides a unified DB
@@ -26,64 +28,45 @@ API. It also provides methods for DB portability and DB feature
 emulation. Most notably it features a DB independent XML-Schema
 manager.
 
-In PEAR status of this package is: %{_status}.
-
 %prep
-
 %setup -q -c
-
-find . -type d -perm 0700 -exec chmod 755 {} \;
-find . -type f -perm 0555 -exec chmod 755 {} \;
-find . -type f -perm 0444 -exec chmod 644 {} \;
-
-for i in `find . -type d -name CVS` `find . -type f -name .cvs\*` `find . -type f -name .#\*`; do
-    if [ -e "$i" ]; then rm -rf $i; fi >&/dev/null
-done
-
-# strip away annoying ^M
-find -type f | grep -v ".gif" | grep -v ".png" | grep -v ".jpg" | xargs %{__perl} -pi -e 's|\r$||g'
+mv package.xml %{upstream_name}-%{version}/%{upstream_name}.xml
 
 %install
 rm -rf %{buildroot}
 
-install -d %{buildroot}%{_datadir}/pear/%{_class}/Driver/{Datatype,Function,Manager,Native,Reverse}
+cd %{upstream_name}-%{version}
+pear install --nodeps --packagingroot %{buildroot} %{upstream_name}.xml
+rm -rf %{buildroot}%{_datadir}/pear/.??*
 
-install %{_pearname}-%{version}/*.php %{buildroot}%{_datadir}/pear/
-install %{_pearname}-%{version}/%{_class}/*.php %{buildroot}%{_datadir}/pear/%{_class}/
-install %{_pearname}-%{version}/%{_class}/Driver/Datatype/*.php %{buildroot}%{_datadir}/pear/%{_class}/Driver/Datatype/
-install %{_pearname}-%{version}/%{_class}/Driver/Function/*.php %{buildroot}%{_datadir}/pear/%{_class}/Driver/Function/
-install %{_pearname}-%{version}/%{_class}/Driver/Manager/*.php %{buildroot}%{_datadir}/pear/%{_class}/Driver/Manager/
-install %{_pearname}-%{version}/%{_class}/Driver/Native/*.php %{buildroot}%{_datadir}/pear/%{_class}/Driver/Native/
-install %{_pearname}-%{version}/%{_class}/Driver/Reverse/*.php %{buildroot}%{_datadir}/pear/%{_class}/Driver/Reverse/
+rm -rf %{buildroot}%{_datadir}/pear/docs
+rm -rf %{buildroot}%{_datadir}/pear/tests
+rm -rf %{buildroot}%{_datadir}/pear/data/%{upstream_name}/LICENSE
 
 install -d %{buildroot}%{_datadir}/pear/packages
-install -m0644 package.xml %{buildroot}%{_datadir}/pear/packages/%{_pearname}.xml
-
-%post
-if [ "$1" = "1" ]; then
-        if [ -x %{_bindir}/pear -a -f %{_datadir}/pear/packages/%{_pearname}.xml ]; then
-                %{_bindir}/pear install --nodeps -r %{_datadir}/pear/packages/%{_pearname}.xml
-        fi
-fi
-if [ "$1" = "2" ]; then
-        if [ -x %{_bindir}/pear -a -f %{_datadir}/pear/packages/%{_pearname}.xml ]; then
-                %{_bindir}/pear upgrade -f --nodeps -r %{_datadir}/pear/packages/%{_pearname}.xml
-        fi
-fi
-
-%preun
-if [ "$1" = 0 ]; then
-        if [ -x %{_bindir}/pear -a -f %{_datadir}/pear/packages/%{_pearname}.xml ]; then
-                %{_bindir}/pear uninstall --nodeps -r %{_pearname}
-        fi
-fi
+install -m 644 %{upstream_name}.xml %{buildroot}%{_datadir}/pear/packages
 
 %clean
 rm -rf %{buildroot}
 
+%post
+%if %mdkversion < 201000
+pear install --nodeps --soft --force --register-only \
+    %{_datadir}/pear/packages/%{upstream_name}.xml >/dev/null || :
+%endif
+
+%preun
+%if %mdkversion < 201000
+if [ "$1" -eq "0" ]; then
+    pear uninstall --nodeps --ignore-errors --register-only \
+        %{pear_name} >/dev/null || :
+fi
+%endif
+
 %files
-%defattr(644,root,root,755)
-%doc %{_pearname}-%{version}/{docs/,tests/}
-%{_datadir}/pear/*.php
+%defattr(-,root,root)
+%doc %{upstream_name}-%{version}/docs/*
+%doc %{upstream_name}-%{version}/LICENSE
 %{_datadir}/pear/%{_class}
-%{_datadir}/pear/packages/%{_pearname}.xml
+%{_datadir}/pear/%{_class}.php
+%{_datadir}/pear/packages/%{upstream_name}.xml
