@@ -15,6 +15,7 @@ Source0:	http://download.pear.php.net/package/%{upstream_name}-%{version}.tgz
 Requires(post): php-pear
 Requires(preun): php-pear
 Requires:	php-pear
+BuildRequires:	php-pear
 BuildArch:	noarch
 Suggests:	php-pear-MDB2_Driver_mysql
 Suggests:	php-pear-MDB2_Driver_mysqli
