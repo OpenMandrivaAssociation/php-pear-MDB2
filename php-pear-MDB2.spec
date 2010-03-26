@@ -4,14 +4,14 @@
 %define		_requires_exceptions pear(test_setup.php)\\|pear(MDB2/Schema.php)\\|pear(PHPUnit.php)
 
 Name:		php-pear-%{upstream_name}
-Version:	2.5.0b1
-Release:	%mkrel 7
+Version:	2.5.0
+Release:	%mkrel 0.0.b2.1
 Summary:	Unified database API
-Epoch:		1
+Epoch:		2
 License:	PHP License
 Group:		Development/PHP
 URL:		http://pear.php.net/package/MDB2/
-Source0:	http://download.pear.php.net/package/%{upstream_name}-%{version}.tgz
+Source0:	http://download.pear.php.net/package/%{upstream_name}-%{version}b2.tgz
 Requires(post): php-pear
 Requires(preun): php-pear
 Requires:	php-pear
@@ -30,13 +30,13 @@ emulation. Most notably it features a DB independent XML-Schema
 manager.
 
 %prep
-%setup -q -c
-mv package.xml %{upstream_name}-%{version}/%{upstream_name}.xml
+%setup -q -c -n %{name}-%{version}b2
+mv package.xml %{upstream_name}-%{version}b2/%{upstream_name}.xml
 
 %install
 rm -rf %{buildroot}
 
-cd %{upstream_name}-%{version}
+cd %{upstream_name}-%{version}b2
 pear install --nodeps --packagingroot %{buildroot} %{upstream_name}.xml
 rm -rf %{buildroot}%{_datadir}/pear/.??*
 
@@ -66,8 +66,8 @@ fi
 
 %files
 %defattr(-,root,root)
-%doc %{upstream_name}-%{version}/docs/*
-%doc %{upstream_name}-%{version}/LICENSE
+%doc %{upstream_name}-%{version}b2/docs/*
+%doc %{upstream_name}-%{version}b2/LICENSE
 %{_datadir}/pear/%{_class}
 %{_datadir}/pear/%{_class}.php
 %{_datadir}/pear/packages/%{upstream_name}.xml
