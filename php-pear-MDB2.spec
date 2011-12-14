@@ -5,7 +5,7 @@
 
 Name:		php-pear-%{upstream_name}
 Version:	2.5.0
-Release:	%mkrel 0.0.b3.1
+Release:	%mkrel 0.0.b3.2
 Summary:	Unified database API
 Epoch:		2
 License:	PHP License
@@ -17,10 +17,12 @@ Requires(preun): php-pear
 Requires:	php-pear
 BuildRequires:	php-pear
 BuildArch:	noarch
-Suggests:	php-pear-MDB2_Driver_mysql
-Suggests:	php-pear-MDB2_Driver_mysqli
-Suggests:	php-pear-MDB2_Driver_pgsql
-Suggests:	php-pear-MDB2_Driver_sqlite
+%define pear_deps php-pear-MDB2_Driver_mysql php-pear-MDB2_Driver_mysqli php-pear-MDB2_Driver_pgsql php-pear-MDB2_Driver_sqlite
+%if %mdkversion >= 200900
+Suggests:	%{pear_deps}
+%else
+Requires:	%{pear_deps}
+%endif
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
