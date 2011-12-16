@@ -5,7 +5,7 @@
 
 Name:		php-pear-%{upstream_name}
 Version:	2.5.0
-Release:	%mkrel 0.0.b3.2
+Release:	%mkrel 0.0.b3.3
 Summary:	Unified database API
 Epoch:		2
 License:	PHP License
@@ -62,7 +62,7 @@ pear install --nodeps --soft --force --register-only \
 %if %mdkversion < 201000
 if [ "$1" -eq "0" ]; then
     pear uninstall --nodeps --ignore-errors --register-only \
-        %{pear_name} >/dev/null || :
+        %{upstream_name} >/dev/null || :
 fi
 %endif
 
