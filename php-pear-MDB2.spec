@@ -1,8 +1,6 @@
 %define		_class		MDB2
 %define		upstream_name	%{_class}
 
-%define		_requires_exceptions pear(test_setup.php)\\|pear(MDB2/Schema.php)\\|pear(PHPUnit.php)
-
 Name:		php-pear-%{upstream_name}
 Version:	2.5.0
 Release:	%mkrel 0.0.b3.3
