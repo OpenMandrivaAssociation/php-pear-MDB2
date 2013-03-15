@@ -3,7 +3,7 @@
 
 Name:		php-pear-%{upstream_name}
 Version:	2.5.0
-Release:	%mkrel 0.0.b3.3
+Release:	0.0.b3.4
 Summary:	Unified database API
 Epoch:		2
 License:	PHP License
@@ -19,7 +19,6 @@ Suggests:	php-pear-MDB2_Driver_mysql
 Suggests:	php-pear-MDB2_Driver_mysqli
 Suggests:	php-pear-MDB2_Driver_pgsql
 Suggests:	php-pear-MDB2_Driver_sqlite
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 MDB2 is a merge of PEAR's DB and Metabases that provides a unified DB
@@ -32,7 +31,6 @@ manager.
 mv package.xml %{upstream_name}-%{version}b3/%{upstream_name}.xml
 
 %install
-rm -rf %{buildroot}
 
 cd %{upstream_name}-%{version}b3
 pear install --nodeps --packagingroot %{buildroot} %{upstream_name}.xml
@@ -46,7 +44,6 @@ install -d %{buildroot}%{_datadir}/pear/packages
 install -m 644 %{upstream_name}.xml %{buildroot}%{_datadir}/pear/packages
 
 %clean
-rm -rf %{buildroot}
 
 
 
