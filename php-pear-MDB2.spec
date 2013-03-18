@@ -2,14 +2,14 @@
 %define		upstream_name	%{_class}
 
 Name:		php-pear-%{upstream_name}
-Version:	2.5.0
-Release:	0.0.b3.4
+Version:	2.5.0b5
+Release:	1
 Summary:	Unified database API
 Epoch:		2
 License:	PHP License
 Group:		Development/PHP
 URL:		http://pear.php.net/package/MDB2/
-Source0:	http://download.pear.php.net/package/%{upstream_name}-%{version}b3.tgz
+Source0:	http://download.pear.php.net/package/MDB2-%{version}.tgz
 Requires(post): php-pear
 Requires(preun): php-pear
 Requires:	php-pear
@@ -168,4 +168,5 @@ install -m 644 %{upstream_name}.xml %{buildroot}%{_datadir}/pear/packages
 
 * Tue Jul 19 2005 Oden Eriksson <oeriksson@mandriva.com> 2.0.0-1mdk
 - initial Mandriva package (PLD import)
+
 
