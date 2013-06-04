@@ -1,15 +1,16 @@
 %define		_class		MDB2
 %define		upstream_name	%{_class}
+%define		beta b5
 
 Name:		php-pear-%{upstream_name}
-Version:	2.5.0
-Release:	0.0.b5
+Version:	2.5.0b5
+Release:	1
 Summary:	Unified database API
 Epoch:		2
 License:	PHP License
 Group:		Development/PHP
 URL:		http://pear.php.net/package/MDB2/
-Source0:	http://download.pear.php.net/package/MDB2-%{version}b5.tgz
+Source0:	http://download.pear.php.net/package/MDB2-%{version}.tgz
 Requires(post): php-pear
 Requires(preun): php-pear
 Requires:	php-pear
@@ -27,12 +28,12 @@ emulation. Most notably it features a DB independent XML-Schema
 manager.
 
 %prep
-%setup -q -c -n %{name}-%{version}b3
-mv package.xml %{upstream_name}-%{version}b3/%{upstream_name}.xml
+%setup -q -c -n %{name}-%{version}%{beta}
+mv package.xml %{upstream_name}-%{version}%{beta}/%{upstream_name}.xml
 
 %install
 
-cd %{upstream_name}-%{version}b3
+cd %{upstream_name}-%{version}%{beta}
 pear install --nodeps --packagingroot %{buildroot} %{upstream_name}.xml
 rm -rf %{buildroot}%{_datadir}/pear/.??*
 
@@ -48,9 +49,8 @@ install -m 644 %{upstream_name}.xml %{buildroot}%{_datadir}/pear/packages
 
 
 %files
-%defattr(-,root,root)
-%doc %{upstream_name}-%{version}b3/docs/*
-%doc %{upstream_name}-%{version}b3/LICENSE
+%doc %{upstream_name}-%{version}%{beta}/docs/*
+%doc %{upstream_name}-%{version}%{beta}/LICENSE
 %{_datadir}/pear/%{_class}
 %{_datadir}/pear/%{_class}.php
 %{_datadir}/pear/packages/%{upstream_name}.xml
@@ -168,5 +168,6 @@ install -m 644 %{upstream_name}.xml %{buildroot}%{_datadir}/pear/packages
 
 * Tue Jul 19 2005 Oden Eriksson <oeriksson@mandriva.com> 2.0.0-1mdk
 - initial Mandriva package (PLD import)
+
 
 
