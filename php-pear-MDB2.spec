@@ -6,7 +6,7 @@ Summary:	Unified database API
 Name:		php-pear-%{modname}
 Epoch:		2
 Version:	2.5.0
-Release:	0.0.%{beta}
+Release:	1
 License:	PHP License
 Group:		Development/PHP
 Url:		http://pear.php.net/package/MDB2/
@@ -15,10 +15,10 @@ BuildArch:	noarch
 BuildRequires:	php-pear
 Requires(post,preun):	php-pear
 Requires:	php-pear
-Suggests:	php-pear-MDB2_Driver_mysql
-Suggests:	php-pear-MDB2_Driver_mysqli
-Suggests:	php-pear-MDB2_Driver_pgsql
-Suggests:	php-pear-MDB2_Driver_sqlite
+Recommends:	php-pear-MDB2_Driver_mysql
+Recommends:	php-pear-MDB2_Driver_mysqli
+Recommends:	php-pear-MDB2_Driver_pgsql
+Recommends:	php-pear-MDB2_Driver_sqlite
 
 %description
 MDB2 is a merge of PEAR's DB and Metabases that provides a unified DB
@@ -48,4 +48,6 @@ install -m 644 %{modname}.xml %{buildroot}%{_datadir}/pear/packages
 %{_datadir}/pear/%{_class}
 %{_datadir}/pear/%{_class}.php
 %{_datadir}/pear/packages/%{modname}.xml
+%{_datadir}/pear/doc/MDB2/docs/*
+%{_datadir}/pear/test/MDB2/tests/
 
