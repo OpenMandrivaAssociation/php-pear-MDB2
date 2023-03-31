@@ -6,7 +6,7 @@ Summary:	Unified database API
 Name:		php-pear-%{modname}
 Epoch:		2
 Version:	2.5.0
-Release:	1
+Release:	2
 License:	PHP License
 Group:		Development/PHP
 Url:		http://pear.php.net/package/MDB2/
