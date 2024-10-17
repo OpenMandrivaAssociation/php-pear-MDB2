@@ -9,7 +9,7 @@ Version:	2.5.0
 Release:	2
 License:	PHP License
 Group:		Development/PHP
-Url:		http://pear.php.net/package/MDB2/
+Url:		https://pear.php.net/package/MDB2/
 Source0:	http://download.pear.php.net/package/MDB2-%{version}%{beta}.tgz
 BuildArch:	noarch
 BuildRequires:	php-pear
